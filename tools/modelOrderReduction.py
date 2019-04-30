@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 '''
     README
@@ -10,6 +11,7 @@
 ####################       IMPORT           ###########################
 import os
 import sys
+import datetime
 path = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(path+'/../python') # TO CHANGE
 
@@ -26,17 +28,22 @@ from mor.reduction.container import ObjToAnimate
 from PyQt4 import QtCore, QtGui
 app = QtGui.QApplication(sys.argv)
 
-originalScene = utility.openFileName('Select the SOFA scene you want to reduce')
-outputDir = utility.openDirName('Select the directory tha will contain all the results')
+now1 = datetime.datetime.now()
+
+# originalScene = utility.openFileName('Select the SOFA scene you want to reduce')
+# outputDir = utility.openDirName('Select the directory tha will contain all the results')
+originalScene = '/home/mjlee/workspace/ModelOrderReduction/tools/sofa_test_scene/diamondRobot.py'
+outputDir='/home/mjlee/workspace/output_cylinder/'
+outputDir = outputDir + now1.strftime("%Y%m%d_%H%M")
 
 ### DIAMOND ROBOT PARAM
-# nodeToReduce = '/modelNode'
-# nord = ObjToAnimate("modelNode/nord", incr=5,incrPeriod=10,rangeOfAction=40)
-# sud = ObjToAnimate("modelNode/sud", incr=5,incrPeriod=10,rangeOfAction=40)
-# est = ObjToAnimate("modelNode/est", incr=5,incrPeriod=10,rangeOfAction=40)
+nodeToReduce = '/modelNode'
+nord = ObjToAnimate("modelNode/cable1", incr=5,incrPeriod=10,rangeOfAction=40)
+sud = ObjToAnimate("modelNode/cable2", incr=5,incrPeriod=10,rangeOfAction=40)
+est = ObjToAnimate("modelNode/cable3", incr=5,incrPeriod=10,rangeOfAction=40)
 # ouest = ObjToAnimate("modelNode/ouest", incr=5,incrPeriod=10,rangeOfAction=40)
-# listObjToAnimate = [nord,ouest,sud,est]
-# addRigidBodyModes = [0,0,0]
+listObjToAnimate = [nord,sud,est]
+addRigidBodyModes = [0,0,0]
 
 ### STARFISH ROBOT PARAM
 # nodeToReduce ='/model'
@@ -68,12 +75,12 @@ outputDir = utility.openDirName('Select the directory tha will contain all the r
 
 
 # Tolerance
-tolModes = 0.001
-tolGIE =  0.05
+tolModes = 0.1
+tolGIE =  0.5
 
 # Optionnal
 verbose = True
-nbrCPU = 4
+nbrCPU = 10
 
 packageName = 'test'
 addToLib = False
@@ -94,7 +101,7 @@ reduceMyModel = ReduceModel(    originalScene,
 #######################################################################
 ####################       EXECUTION        ###########################
 
-# reduceMyModel.performReduction()
+reduceMyModel.performReduction()
 
 ####################    SOFA LAUNCHER       ##########################
 #                                                                    #

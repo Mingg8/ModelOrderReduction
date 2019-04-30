@@ -13,21 +13,17 @@ from stlib.physics.constraints import FixedBox
 from softrobots.actuators import PullingCable
 
 actuatorsParam = [
-        {'withName' : 'nord',
+        {'withName' : 'cable1',
          'withCableGeometry' : [[0, 97, 45]],
          'withAPullPointLocation' : [0, 10, 30]
         },
-        {'withName' : 'ouest',
+        {'withName' : 'cable2',
          'withCableGeometry' : [[-97, 0, 45]],
          'withAPullPointLocation' : [-10, 0, 30]
         },
-        {'withName' : 'sud',
+        {'withName' :'cable3',
          'withCableGeometry' : [[0, -97, 45]],
          'withAPullPointLocation' : [0, -10, 30]
-        },
-        {'withName' : 'est',
-         'withCableGeometry' : [[97, 0, 45]],
-         'withAPullPointLocation' : [10, 0, 30]
         }
     ]
 
@@ -52,7 +48,8 @@ def createScene(rootNode):
 
     modelNode = ElasticMaterialObject(
         attachedTo=rootNode,
-        volumeMeshFileName=meshPath+'siliconeV0.vtu',
+        volumeMeshFileName=meshPath+'cylinder_real_sparse.vtu',
+        # volumeMeshFileName=meshPath+'siliconeV0.vtu',
         name='modelNode',
         rotation=[90, 0.0, 0.0],
         translation=[0.0, 0.0, 35],
@@ -65,10 +62,10 @@ def createScene(rootNode):
     
     modelNode.createObject('GenericConstraintCorrection', solverName='solver')
 
-    FixedBox(
-        atPositions=[-15, -15, -40,  15, 15, 10],
-        applyTo=modelNode,
-        doVisualization=True)       
+   #  FixedBox(
+   #      atPositions=[-15, -15, -40,  15, 15, 10],
+   #      applyTo=modelNode,
+   #      doVisualization=True)       
 
     for i in range(len(actuatorsParam)):
         cable = PullingCable(

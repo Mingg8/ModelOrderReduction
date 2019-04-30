@@ -14,16 +14,16 @@ from softrobots.actuators import PullingCable
 
 actuatorsParam = [
         {'withName' : 'cable1',
-         'withCableGeometry' : [[0, 97, 45]],
-         'withAPullPointLocation' : [0, 10, 30]
+         'withCableGeometry' : [[0, 5, -300]],
+         'withAPullPointLocation' : [0, 200, -300]
         },
         {'withName' : 'cable2',
-         'withCableGeometry' : [[-97, 0, 45]],
-         'withAPullPointLocation' : [-10, 0, 30]
+         'withCableGeometry' : [[0, 5, -300]],
+         'withAPullPointLocation' : [0, 200, -100]
         },
         {'withName' :'cable3',
-         'withCableGeometry' : [[0, -97, 45]],
-         'withAPullPointLocation' : [0, -10, 30]
+         'withCableGeometry' : [[0, 5, -300]],
+         'withAPullPointLocation' : [0, 200, -400]
         }
     ]
 
@@ -70,7 +70,7 @@ def createScene(rootNode):
             name="box1",   
             doVisualization=True)       
     FixedBox(
-            atPositions=[-15, -5, -615, 15, 25, -545],
+            atPositions=[-15, -5, -615, 15, 25, -585],
             applyTo=modelNode,
             name="box2",
             doVisualization=True)

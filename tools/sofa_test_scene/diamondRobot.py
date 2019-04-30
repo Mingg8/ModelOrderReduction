@@ -51,21 +51,29 @@ def createScene(rootNode):
         volumeMeshFileName=meshPath+'cylinder_real_sparse.vtu',
         # volumeMeshFileName=meshPath+'siliconeV0.vtu',
         name='modelNode',
-        rotation=[90, 0.0, 0.0],
-        translation=[0.0, 0.0, 35],
+        # rotation=[90, 0.0, 0.0],
+        # translation=[0.0, 0.0, 35],
+        rotation=[0.0, 0.0, 0.0],
+        translation=[0.0, 0.0, 0],
         totalMass=0.5,
         withConstrain=False,
-        surfaceMeshFileName=meshPath+'surface.stl',
+        surfaceMeshFileName=meshPath+'cylinder.STL',
         surfaceColor=[0.7, 0.7, 0.7, 0.7],
         poissonRatio=0.45,
         youngModulus=450)
     
     modelNode.createObject('GenericConstraintCorrection', solverName='solver')
 
-   #  FixedBox(
-   #      atPositions=[-15, -15, -40,  15, 15, 10],
-   #      applyTo=modelNode,
-   #      doVisualization=True)       
+    FixedBox(
+            atPositions=[-15, -5, -20,  15, 25, 10],
+            applyTo=modelNode,
+            name="box1",   
+            doVisualization=True)       
+    FixedBox(
+            atPositions=[-15, -5, -615, 15, 25, -545],
+            applyTo=modelNode,
+            name="box2",
+            doVisualization=True)
 
     for i in range(len(actuatorsParam)):
         cable = PullingCable(
